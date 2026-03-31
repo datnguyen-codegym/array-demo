@@ -1,16 +1,4 @@
 
-
-
-let array = new Array(10);
-
-
-console.log(array.reduce(
-    (previousValue, currentValue) => {
-        return previousValue.concat(currentValue.toString());
-    }, ""
-))
-
-
 /**
 * // mutate
 * // thêm phần tử
@@ -101,18 +89,70 @@ const orders = [
 /**
  * Yêu cầu thực hành:
  * Bạn hãy sử dụng các phương thức của mảng (filter, map, reduce, find, forEach, some, every, flat, flatMap...) để thực hiện các nhiệm vụ sau:
- *
- * 1. Lọc đơn hàng: Tạo một mảng mới chỉ chứa các đơn hàng có trạng thái (status) là "completed".
- *
- * 2. Lấy danh sách khách hàng: Tạo một mảng mới chứa tên của tất cả khách hàng.
- *
- * 3. Tính tổng doanh thu: Tính tổng tiền (total) của tất cả các đơn hàng đã "completed".
- *
- * 4. Tìm kiếm đơn hàng: Tìm đơn hàng đầu tiên của khách hàng tên là "An".
- *
- * 5. Kiểm tra đơn hàng lớn: Kiểm tra xem có đơn hàng nào có tổng tiền (total) trên 500 hay không? (Trả về true/false).
- *
- * 6. Kiểm tra tính hợp lệ: Kiểm tra xem có phải tất cả đơn hàng đều có ít nhất một sản phẩm trong danh sách items hay không? (Trả về true/false).
+ */
+ /** 1. Lọc đơn hàng: Tạo một mảng mới chỉ chứa các đơn hàng có trạng thái (status) là "completed".
+ */
+
+ let Constant  = {
+     COMPLETED: "completed",
+     PENDING: "pending",
+     CANCELLED: "cancelled"
+ }
+
+ function getOrderByStatus(filterStatus) {
+     let predicate = (order, index, array) => {
+         return order.status === filterStatus;
+     }
+     return orders.filter(predicate);
+
+     // return orders.filter(order => order.status === filterStatus);
+ }
+
+console.log(getOrderByStatus(Constant.COMPLETED));
+
+ /** 2. Lấy danh sách khách hàng: Tạo một mảng mới chứa tên của tất cả khách hàng.
+ */
+function mappingCustomerName() {
+    return orders.map(order => order.customer)
+ }
+
+console.log(mappingCustomerName());
+ /** 3. Tính tổng doanh thu: Tính tổng tiền (total) của tất cả các đơn hàng đã "completed".
+ */
+sumTotalUnit = (orders) => {
+      return orders.map(order => order.total)
+          .reduce(
+              (previousValue, currentValue) => {
+                  previousValue += currentValue;
+                  return previousValue;
+              },
+              0
+          )
+  }
+
+sumTotalUnitByStatusCompleted = () => {
+      let completedOrder = getOrderByStatus(Constant.COMPLETED);
+      return sumTotalUnit(completedOrder);
+  }
+console.log(sumTotalUnitByStatusCompleted());
+
+/** 4. Tìm kiếm đơn hàng: Tìm đơn hàng đầu tiên của khách hàng tên là "An".
+ */
+let name = 'An';
+function findFirstOrderByCustomer(customerName) {
+    let predicate = (order, index, array) => {
+        return order.customer === name
+    };
+    return orders.find(predicate, this);
+}
+
+console.log('----------------------------')
+console.log(findFirstOrderByCustomer('An'));
+
+/* 5. Kiểm tra đơn hàng lớn: Kiểm tra xem có đơn hàng nào có tổng tiền (total) trên 500 hay không? (Trả về true/false).
+ */
+
+ /* 6. Kiểm tra tính hợp lệ: Kiểm tra xem có phải tất cả đơn hàng đều có ít nhất một sản phẩm trong danh sách items hay không? (Trả về true/false).
  *
  * 7. Danh sách sản phẩm độc nhất: Tạo một mảng chứa tất cả các sản phẩm có trong tất cả đơn hàng, nhưng mỗi sản phẩm chỉ xuất hiện một lần (không trùng lặp).
  *
@@ -141,6 +181,46 @@ const orders = [
  *
  */
 
+
+// class InventoryManager {
+//     constructor(threshold) {
+//         this.threshold = threshold;
+//     }
+//
+//     isLowStock(item) {
+//         console.log(this);
+//         return item.quantity < this.threshold;
+//     }
+//
+//     findEmergencyItem(items) {
+//         // Nếu không truyền 'this', hàm isLowStock sẽ bị lỗi vì không thấy 'this.threshold'
+//         return items.find(this.isLowStock, this);
+//     }
+// }
+//
+// const manager = new InventoryManager(5);
+// const stock = [{ name: "Pen", quantity: 10 }, { name: "Paper", quantity: 2 }];
+// console.log(manager.findEmergencyItem(stock)); // { name: "Paper", quantity: 2 }
+
+// js luôn truyền ngầm định this là tại scope nơi được khai báo nếu không chỉ định tường minh
+// const validator = {
+//     minPrice: 100,
+//     isExpensive(order) {
+//         // 'this' ở đây sẽ trỏ tới 'validator' nhờ tham số thisArg
+//         console.log(this);
+//         return order.total > this.minPrice;
+//     }
+// };
+//
+// const orders1 = [
+//     { id: 1, total: 50 },
+//     { id: 2, total: 150 }
+// ];
+//
+// // Truyền 'validator' làm thisArg ở tham số thứ 2 của .find()
+// const expensiveOrder = orders1.find(validator.isExpensive, validator);
+//
+// console.log(expensiveOrder); // { id: 2, total: 150 }
 
 
 
