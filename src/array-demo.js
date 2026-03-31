@@ -102,21 +102,21 @@ const orders = [
  * Yêu cầu thực hành:
  * Bạn hãy sử dụng các phương thức của mảng (filter, map, reduce, find, forEach, some, every, flat, flatMap...) để thực hiện các nhiệm vụ sau:
  *
- * Lọc đơn hàng: Tạo một mảng mới chỉ chứa các đơn hàng có trạng thái (status) là "completed".
+ * 1. Lọc đơn hàng: Tạo một mảng mới chỉ chứa các đơn hàng có trạng thái (status) là "completed".
  *
- * Lấy danh sách khách hàng: Tạo một mảng mới chứa tên của tất cả khách hàng.
+ * 2. Lấy danh sách khách hàng: Tạo một mảng mới chứa tên của tất cả khách hàng.
  *
- * Tính tổng doanh thu: Tính tổng tiền (total) của tất cả các đơn hàng đã "completed".
+ * 3. Tính tổng doanh thu: Tính tổng tiền (total) của tất cả các đơn hàng đã "completed".
  *
- * Tìm kiếm đơn hàng: Tìm đơn hàng đầu tiên của khách hàng tên là "An".
+ * 4. Tìm kiếm đơn hàng: Tìm đơn hàng đầu tiên của khách hàng tên là "An".
  *
- * Kiểm tra đơn hàng lớn: Kiểm tra xem có đơn hàng nào có tổng tiền (total) trên 500 hay không? (Trả về true/false).
+ * 5. Kiểm tra đơn hàng lớn: Kiểm tra xem có đơn hàng nào có tổng tiền (total) trên 500 hay không? (Trả về true/false).
  *
- * Kiểm tra tính hợp lệ: Kiểm tra xem có phải tất cả đơn hàng đều có ít nhất một sản phẩm trong danh sách items hay không? (Trả về true/false).
+ * 6. Kiểm tra tính hợp lệ: Kiểm tra xem có phải tất cả đơn hàng đều có ít nhất một sản phẩm trong danh sách items hay không? (Trả về true/false).
  *
- * Danh sách sản phẩm độc nhất: Tạo một mảng chứa tất cả các sản phẩm có trong tất cả đơn hàng, nhưng mỗi sản phẩm chỉ xuất hiện một lần (không trùng lặp).
+ * 7. Danh sách sản phẩm độc nhất: Tạo một mảng chứa tất cả các sản phẩm có trong tất cả đơn hàng, nhưng mỗi sản phẩm chỉ xuất hiện một lần (không trùng lặp).
  *
- * Thống kê theo khách hàng: Tạo một đối tượng (object) thống kê số lượng đơn hàng của từng khách hàng.
+ * 8. Thống kê theo khách hàng: Tạo một đối tượng (object) thống kê số lượng đơn hàng của từng khách hàng.
  *
  * Ví dụ: { An: 2, Bình: 1, ... }
  *
