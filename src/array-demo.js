@@ -81,10 +81,11 @@
 const orders = [
     { id: 1, customer: "An", items: ["Apple", "Banana"], total: 50, status: "completed" },
     { id: 2, customer: "Bình", items: ["Orange", "Mango"], total: 120, status: "pending" },
-    { id: 3, customer: "Chi", items: ["Apple", "Orange"], total: 80, status: "completed" },
+    { id: 3, customer: "Chí", items: ["Apple", "Orange"], total: 80, status: "completed" },
     { id: 4, customer: "Duy", items: ["Banana", "Mango", "Kiwi"], total: 200, status: "completed" },
     { id: 5, customer: "An", items: ["Watermelon"], total: 30, status: "cancelled" },
     { id: 6, customer: "Hoa", items: ["Apple", "Kiwi"], total: 150, status: "pending" }
+    // { id: 7, customer: "Thi", items: null, total: 150, status: "pending" }
 ];
 /**
  * Yêu cầu thực hành:
@@ -152,34 +153,56 @@ console.log(findFirstOrderByCustomer('An'));
 /* 5. Kiểm tra đơn hàng lớn: Kiểm tra xem có đơn hàng nào có tổng tiền (total) trên 500 hay không? (Trả về true/false).
  */
 
+function checkTotalOver(total) {
+    return orders.some(order => order.total > total);
+}
+
+console.log("Đơn hàng lớn hơn 500: " + (checkTotalOver(500) ? "Có" : "Không"));
+
  /* 6. Kiểm tra tính hợp lệ: Kiểm tra xem có phải tất cả đơn hàng đều có ít nhất một sản phẩm trong danh sách items hay không? (Trả về true/false).
- *
- * 7. Danh sách sản phẩm độc nhất: Tạo một mảng chứa tất cả các sản phẩm có trong tất cả đơn hàng, nhưng mỗi sản phẩm chỉ xuất hiện một lần (không trùng lặp).
- *
- * 8. Thống kê theo khách hàng: Tạo một đối tượng (object) thống kê số lượng đơn hàng của từng khách hàng.
- *
- * Ví dụ: { An: 2, Bình: 1, ... }
- *
- * Gợi ý hướng dẫn giải:
- * Dưới đây là một số gợi ý về phương thức bạn nên sử dụng cho từng câu:
- *
- * Câu 1: Dùng .filter()
- *
- * Câu 2: Dùng .map()
- *
- * Câu 3: Kết hợp .filter() và .reduce()
- *
- * Câu 4: Dùng .find()
- *
- * Câu 5: Dùng .some()
- *
- * Câu 6: Dùng .every()
- *
- * Câu 7: Dùng .flatMap() (hoặc .map() + .flat()) kết hợp với new Set()
- *
- * Câu 8: Dùng .reduce()
- *
  */
+
+function checkEveryOrderHasItem() {
+    let predicate = (order) => {
+        return order.items?.length > 0;
+    };
+    return orders.every(predicate);
+}
+
+console.log(checkEveryOrderHasItem());
+
+ /* 7. Danh sách sản phẩm độc nhất: Tạo một mảng chứa tất cả các sản phẩm có trong tất cả đơn hàng, nhưng mỗi sản phẩm chỉ xuất hiện một lần (không trùng lặp).
+ hash => hashCode() : các phần tử giống nhau thì chắc chắn có cùng hashCode, nhưng phần tử có cùng hashCode thì chưa chắc bằng nhau
+ hashCodeAndEqual();
+ tủ: có các ngăn: buckets
+ [a1,a2,a3 (8 -> 64 phần tử) -> chuyển thành cấu trúc dạng cây ] [b1,c1] [e1] [] [] [] ...
+ */
+
+function getDistinctItem() {
+    let allItem = orders.flatMap(order => order.items);
+    return [...new Set(allItem)];
+}
+
+console.log(getDistinctItem());
+
+
+ /* 8. Thống kê theo khách hàng: Tạo một đối tượng (object) thống kê số lượng đơn hàng của từng khách hàng.
+ */
+function statiticOrderByCustomer() {
+    let result = {}
+    return orders.reduce((acc, order) => {
+        // if (result[order.customer] == undefined ) {
+        //     result[order.customer] = 0;
+        // }
+        // result[order.customer]++;
+        //
+        // return acc;
+        acc[order.customer] = (acc[order.customer] || 0) + 1;
+        return acc;
+    }, {})
+}
+
+console.log(statiticOrderByCustomer());
 
 
 // class InventoryManager {
@@ -221,13 +244,3 @@ console.log(findFirstOrderByCustomer('An'));
 // const expensiveOrder = orders1.find(validator.isExpensive, validator);
 //
 // console.log(expensiveOrder); // { id: 2, total: 150 }
-
-
-
-
-
-
-
-
-
-
